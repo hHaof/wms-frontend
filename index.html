@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CallMe F&L — Fulfillment & Logistics for Dropship & POD</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --pink: #e91e8c;
@@ -428,8 +428,8 @@
       color: var(--text);
     }
 
-    .orb-label-1 { top: 40px;   right: -20px; animation-delay: 0.9s; }
-    .orb-label-2 { bottom: 100px; left: -40px; animation-delay: 1.2s; }
+    .orb-label-1 { top: 40px;    right: -20px; animation-delay: 0.9s; }
+    .orb-label-2 { bottom: 100px; left: -40px;  animation-delay: 1.2s; }
     .orb-label-3 { bottom: 30px;  right: -10px; animation-delay: 1.5s; }
 
     @keyframes labelIn {
@@ -441,7 +441,6 @@
        SHARED SECTION STYLES
     ════════════════════════════════ */
     .section { padding: 100px 24px; }
-
     .container { max-width: 1200px; margin: 0 auto; }
 
     .section-tag {
@@ -463,10 +462,7 @@
       margin-bottom: 16px;
     }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+    .section-header { text-align: center; margin-bottom: 60px; }
 
     .section-sub {
       font-size: 16px;
@@ -538,11 +534,7 @@
 
     .play-btn svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
     .stat-card {
       background: var(--dark3);
@@ -572,11 +564,7 @@
     ════════════════════════════════ */
     .services { background: var(--dark); }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
     .service-card {
       background: var(--dark3);
@@ -624,11 +612,7 @@
     ════════════════════════════════ */
     .features { background: var(--dark2); }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
     .feature-card {
       background: var(--dark3);
@@ -729,48 +713,7 @@
     .step-desc { font-size: 13px; line-height: 1.65; color: var(--text-muted); }
 
     /* ════════════════════════════════
-       7. PARTNERS
-    ════════════════════════════════ */
-    .partners { background: var(--dark2); }
-
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-    }
-
-    .partner-card {
-      background: var(--dark3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px;
-      transition: all 0.3s ease;
-    }
-
-    .partner-card:hover {
-      border-color: rgba(233,30,140,0.4);
-      background: var(--pink-dim);
-      box-shadow: 0 0 20px rgba(233,30,140,0.15);
-    }
-
-    .partner-name {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      text-align: center;
-      transition: color 0.3s ease;
-    }
-
-    .partner-card:hover .partner-name { color: var(--pink-light); }
-
-    /* ════════════════════════════════
-       8. FOOTER
+       7. FOOTER
     ════════════════════════════════ */
     .footer {
       background: var(--dark3);
@@ -872,7 +815,6 @@
     ════════════════════════════════ */
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .partners-grid { grid-template-columns: repeat(4, 1fr); }
       .footer-top { grid-template-columns: 1fr 1fr 1fr; }
     }
 
@@ -899,7 +841,6 @@
       .features-grid { grid-template-columns: 1fr 1fr; }
       .steps-row { grid-template-columns: 1fr 1fr; gap: 32px; }
       .steps-row::before { display: none; }
-      .partners-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
@@ -910,7 +851,6 @@
       .btn-primary, .btn-outline { justify-content: center; }
       .features-grid { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-top { grid-template-columns: 1fr; }
     }
   </style>
@@ -930,7 +870,6 @@
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#how">How It Works</a></li>
-      <li><a href="#partners">Partners</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
@@ -949,19 +888,10 @@
 
     <div class="hero-container">
       <div>
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          <span class="hero-badge-text">Fulfillment Partner for Dropshippers</span>
-        </div>
-
         <h1 class="hero-headline">
-          Logistics That <em>Moves</em><br>as Fast as Your Sales
+          "Built for <em>Speed</em><br>Designed to Scale."
         </h1>
-
-        <p class="hero-sub">
-          CallMe F&amp;L handles warehousing, picking, packing, and last-mile delivery — so you scale without the headache.
-        </p>
-
+        <p class="hero-sub">CallMe delivers end-to-end fulfillment — warehousing, picking, packing, and last-mile — for fast-growing brands worldwide.</p>
         <div class="hero-actions">
           <a href="#services" class="btn-primary">
             View Services
@@ -995,7 +925,7 @@
     </div>
   </section>
 
-  <hr class="separator" />
+  <hr class="separator">
 
   <!-- ═══════════════════════════
        3. ABOUT
@@ -1007,7 +937,7 @@
           <span class="section-tag reveal">Our Story</span>
           <h2 class="section-title reveal reveal-delay-1">From Local Roots to Regional Scale</h2>
           <p class="about-text reveal reveal-delay-2">
-            Born in Ho Chi Minh City, CallMe F&amp;L started as a small fulfillment hub serving local Shopee and Facebook sellers. Within two years, we expanded across Vietnam — partnering with top couriers, building warehouse nodes in Hanoi and Da Nang, and integrating with every major e-commerce platform in Southeast Asia.
+            Born in Dallas, Texas, CallMe F&amp;L started as a small fulfillment hub serving online sellers. Within two years, we scaled into a global fulfillment network — partnering with leading logistics providers worldwide and integrating with major e-commerce platforms to support businesses across international markets.
           </p>
           <p class="about-text reveal reveal-delay-3">
             Today we process hundreds of orders daily with an accuracy rate that rivals global 3PLs — at prices built for independent sellers and growing brands. We don't just ship packages; we handle the operational complexity so you can focus on what matters: marketing, products, and growth.
@@ -1022,12 +952,12 @@
           </div>
           <div class="stats-grid">
             <div class="stat-card reveal reveal-delay-2">
-              <div class="stat-value">500+</div>
+              <div class="stat-value">200+</div>
               <div class="stat-label">Orders per Day</div>
             </div>
             <div class="stat-card reveal reveal-delay-3">
-              <div class="stat-value">15+</div>
-              <div class="stat-label">Provinces Covered</div>
+              <div class="stat-value">100+</div>
+              <div class="stat-label">Global Covered</div>
             </div>
             <div class="stat-card reveal reveal-delay-4">
               <div class="stat-value">99.2%</div>
@@ -1043,7 +973,7 @@
     </div>
   </section>
 
-  <hr class="separator" />
+  <hr class="separator">
 
   <!-- ═══════════════════════════
        4. SERVICES
@@ -1053,7 +983,6 @@
       <div class="section-header">
         <span class="section-tag reveal">What We Do</span>
         <h2 class="section-title reveal reveal-delay-1">Our Services</h2>
-        <p class="section-sub reveal reveal-delay-2">End-to-end fulfillment solutions purpose-built for dropshippers and print-on-demand sellers.</p>
       </div>
 
       <div class="services-grid">
@@ -1065,21 +994,21 @@
         <div class="service-card reveal reveal-delay-2">
           <span class="service-icon">🚚</span>
           <div class="service-name">Last-Mile Delivery</div>
-          <p class="service-desc">Fast, reliable delivery to customers across Vietnam and Southeast Asia. Multiple courier integrations for best rates.</p>
+          <p class="service-desc">Fast, reliable delivery to customers across the world. Multiple courier integrations for best rates.</p>
         </div>
         <div class="service-card reveal reveal-delay-3">
           <span class="service-icon">🖨️</span>
           <div class="service-name">Print-on-Demand</div>
-          <p class="service-desc">DTG, DTF, sublimation printing fulfilled and shipped same day. Apparel, accessories, home decor and more.</p>
+          <p class="service-desc">Create custom products without holding inventory. From apparel and accessories to home decor, everything is made to order.</p>
         </div>
         <div class="service-card reveal reveal-delay-1">
           <span class="service-icon">🔗</span>
-          <div class="service-name">Shopify Integration</div>
-          <p class="service-desc">Auto-sync orders from your Shopify or TikTok Shop store. Zero manual work — orders flow in, packages flow out.</p>
+          <div class="service-name">Global Fulfillment</div>
+          <p class="service-desc">Store, pack, and ship orders worldwide with optimized logistics and faster delivery times across key markets.</p>
         </div>
         <div class="service-card reveal reveal-delay-2">
           <span class="service-icon">📊</span>
-          <div class="service-name">Dashboard & Tracking</div>
+          <div class="service-name">Dashboard &amp; Tracking</div>
           <p class="service-desc">Real-time order tracking, inventory alerts, and analytics. Full visibility into your fulfillment pipeline 24/7.</p>
         </div>
         <div class="service-card reveal reveal-delay-3">
@@ -1091,7 +1020,7 @@
     </div>
   </section>
 
-  <hr class="separator" />
+  <hr class="separator">
 
   <!-- ═══════════════════════════
        5. FEATURES / WHY US
@@ -1100,7 +1029,7 @@
     <div class="container">
       <div class="section-header">
         <span class="section-tag reveal">Why Us</span>
-        <h2 class="section-title reveal reveal-delay-1">Why Sellers Choose CallMe F&amp;L</h2>
+        <h2 class="section-title reveal reveal-delay-1">Why Sellers Choose CallMe</h2>
         <p class="section-sub reveal reveal-delay-2">Everything you need to scale from 1 to 10,000 orders — under one roof.</p>
       </div>
 
@@ -1123,12 +1052,12 @@
         <div class="feature-card reveal reveal-delay-4">
           <div class="feature-icon">✅</div>
           <div class="feature-title">Proven Quality</div>
-          <p class="feature-desc">Trusted by top Shopify and TikTok Shop sellers across Southeast Asia with 99.2% accuracy.</p>
+          <p class="feature-desc">Trusted by top sellers across the world with 99.2% accuracy.</p>
         </div>
         <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon">⚡</div>
           <div class="feature-title">Ultra Fast Speed</div>
-          <p class="feature-desc">Ships within 1 business day. Your customers expect fast — we deliver faster.</p>
+          <p class="feature-desc">Ships within 3 business days. Your customers expect fast — we deliver faster.</p>
         </div>
         <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon">🕐</div>
@@ -1138,7 +1067,7 @@
         <div class="feature-card reveal reveal-delay-3">
           <div class="feature-icon">🗺️</div>
           <div class="feature-title">Multiple Locations</div>
-          <p class="feature-desc">Warehouses in Ho Chi Minh City, Hanoi, and Da Nang. Closer to your customers means faster delivery.</p>
+          <p class="feature-desc">Warehouses in Dallas, Texas. Closer to your customers means faster delivery.</p>
         </div>
         <div class="feature-card reveal reveal-delay-4">
           <div class="feature-icon">💰</div>
@@ -1149,7 +1078,7 @@
     </div>
   </section>
 
-  <hr class="separator" />
+  <hr class="separator">
 
   <!-- ═══════════════════════════
        6. HOW IT WORKS
@@ -1166,65 +1095,35 @@
         <div class="step reveal reveal-delay-1">
           <div class="step-number">01</div>
           <div class="step-icon">🔌</div>
-          <div class="step-title">Connect Store</div>
-          <p class="step-desc">Integrate your Shopify, TikTok Shop, or WooCommerce store in minutes. Orders flow in automatically.</p>
+          <div class="step-title">Contact Us</div>
+          <p class="step-desc">Prepare your products. Orders flow in automatically.</p>
         </div>
         <div class="step reveal reveal-delay-2">
           <div class="step-number">02</div>
           <div class="step-icon">🏭</div>
-          <div class="step-title">Send Inventory</div>
-          <p class="step-desc">Ship your products to our warehouse. We receive, inspect, and catalog every SKU in real time.</p>
+          <div class="step-title">Inventory</div>
+          <p class="step-desc">We receive, inspect, and catalog every SKU in real time.</p>
         </div>
         <div class="step reveal reveal-delay-3">
           <div class="step-number">03</div>
           <div class="step-icon">📬</div>
-          <div class="step-title">We Pick &amp; Pack</div>
+          <div class="step-title">Fulfill &amp; Pack</div>
           <p class="step-desc">Our team picks, packs, and labels every order with precision — including custom branded packaging.</p>
         </div>
         <div class="step reveal reveal-delay-4">
           <div class="step-number">04</div>
           <div class="step-icon">🚀</div>
           <div class="step-title">Delivered</div>
-          <p class="step-desc">Your customer receives their order fast. Tracking updates pushed automatically to your store.</p>
+          <p class="step-desc">Your customer receives their order fast. Tracking updates pushed automatically through the system.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="separator" />
+  <hr class="separator">
 
   <!-- ═══════════════════════════
-       7. TRUSTED BY
-  ═══════════════════════════ -->
-  <section class="section partners" id="partners">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag reveal">Ecosystem</span>
-        <h2 class="section-title reveal reveal-delay-1">Trusted By</h2>
-        <p class="section-sub reveal reveal-delay-2">Integrated with the platforms and carriers your business already runs on.</p>
-      </div>
-
-      <div class="partners-grid">
-        <div class="partner-card reveal reveal-delay-1"><span class="partner-name">SHOPIFY</span></div>
-        <div class="partner-card reveal reveal-delay-2"><span class="partner-name">TIKTOK SHOP</span></div>
-        <div class="partner-card reveal reveal-delay-3"><span class="partner-name">LAZADA</span></div>
-        <div class="partner-card reveal reveal-delay-4"><span class="partner-name">TIKI</span></div>
-        <div class="partner-card reveal reveal-delay-5"><span class="partner-name">SENDO</span></div>
-        <div class="partner-card reveal reveal-delay-6"><span class="partner-name">WOOCOMMERCE</span></div>
-        <div class="partner-card reveal reveal-delay-1"><span class="partner-name">PRINTFUL</span></div>
-        <div class="partner-card reveal reveal-delay-2"><span class="partner-name">PRINTIFY</span></div>
-        <div class="partner-card reveal reveal-delay-3"><span class="partner-name">GHTK</span></div>
-        <div class="partner-card reveal reveal-delay-4"><span class="partner-name">GIAO HÀNG NHANH</span></div>
-        <div class="partner-card reveal reveal-delay-5"><span class="partner-name">VNPOST</span></div>
-        <div class="partner-card reveal reveal-delay-6"><span class="partner-name">ZALOPAY</span></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="separator" />
-
-  <!-- ═══════════════════════════
-       8. FOOTER
+       7. FOOTER
   ═══════════════════════════ -->
   <footer class="footer" id="contact">
     <div class="footer-inner">
@@ -1234,16 +1133,15 @@
             <div class="footer-brand-icon">🌐</div>
             CallMe F&amp;L
           </div>
-          <p class="footer-tagline">Fulfillment &amp; Logistics — Built for Dropship &amp; POD sellers across Southeast Asia.</p>
+          <p class="footer-tagline">Fulfillment &amp; Logistics — Built for Lovers across the world.</p>
         </div>
 
         <div>
           <div class="footer-col-title">Services</div>
           <ul class="footer-links">
             <li><a href="#services">Warehousing</a></li>
-            <li><a href="#services">POD Printing</a></li>
+            <li><a href="#services">POD</a></li>
             <li><a href="#services">Last-Mile Delivery</a></li>
-            <li><a href="#services">Integration</a></li>
             <li><a href="#services">Packaging</a></li>
           </ul>
         </div>
@@ -1252,28 +1150,17 @@
           <div class="footer-col-title">Company</div>
           <ul class="footer-links">
             <li><a href="#about">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Facilities</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
 
-        <div>
-          <div class="footer-col-title">Resources</div>
-          <ul class="footer-links">
-            <li><a href="#">API Docs</a></li>
-            <li><a href="#">Help Center</a></li>
-          </ul>
-        </div>
+        <div></div>
 
         <div>
           <div class="footer-col-title">Social</div>
           <ul class="footer-links">
             <li><a href="#">Facebook</a></li>
             <li><a href="#">Instagram</a></li>
-            <li><a href="#">TikTok</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">YouTube</a></li>
           </ul>
         </div>
       </div>
@@ -1292,13 +1179,10 @@
   </footer>
 
   <script>
-    // 1. Scroll reveal via IntersectionObserver
+    // 1. Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -1309,7 +1193,7 @@
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
 
-    // 3. Smooth scroll for anchor links
+    // 3. Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', e => {
         const target = document.querySelector(link.getAttribute('href'));
@@ -1317,19 +1201,18 @@
       });
     });
 
-    // 4. Active nav link on scroll
+    // 4. Active nav link
     const sections = document.querySelectorAll('section[id], footer[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     const activeObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
+        if (e.isIntersecting)
           navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
-        }
       });
     }, { threshold: 0.4 });
     sections.forEach(s => activeObserver.observe(s));
 
-    // 5. Orb parallax on mousemove
+    // 5. Orb parallax
     const heroSection = document.querySelector('.hero');
     const heroVisual = document.getElementById('heroVisual');
     if (heroSection && heroVisual) {
@@ -1338,8 +1221,7 @@
         const dx = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
         const dy = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
         document.querySelectorAll('.orb-label').forEach((el, i) => {
-          const f = (i + 1) * 7;
-          el.style.transform = `translate(${dx * f}px, ${dy * f}px)`;
+          el.style.transform = `translate(${dx * (i + 1) * 7}px, ${dy * (i + 1) * 7}px)`;
         });
       });
       heroSection.addEventListener('mouseleave', () => {
@@ -1354,18 +1236,10 @@
     hamburger.addEventListener('click', () => {
       menuOpen = !menuOpen;
       Object.assign(navLinksList.style, menuOpen ? {
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'absolute',
-        top: '66px',
-        left: '0',
-        right: '0',
-        background: 'rgba(10,10,15,0.98)',
-        padding: '16px',
-        borderRadius: '0 0 14px 14px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderTop: 'none',
-        gap: '4px'
+        display: 'flex', flexDirection: 'column', position: 'absolute',
+        top: '66px', left: '0', right: '0', background: 'rgba(10,10,15,0.98)',
+        padding: '16px', borderRadius: '0 0 14px 14px',
+        border: '1px solid rgba(255,255,255,0.08)', borderTop: 'none', gap: '4px'
       } : { display: 'none' });
     });
   </script>
