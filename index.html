@@ -1,7 +1,1373 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=/dashboard.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CallMe F&L — Fulfillment & Logistics for Dropship & POD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #e91e8c;
+      --pink-light: #ff4db8;
+      --pink-dim: rgba(233,30,140,0.12);
+      --dark: #0a0a0f;
+      --dark2: #0f0f18;
+      --dark3: #14141f;
+      --border: rgba(255,255,255,0.08);
+      --text: #f5f5f7;
+      --text-muted: #8e8e9a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Orbitron', monospace; }
+    a { color: inherit; text-decoration: none; }
+
+    .separator {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      border: none;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ════════════════════════════════
+       1. NAVBAR
+    ════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 48px);
+      max-width: 1200px;
+      z-index: 1000;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      animation: slideDown 0.7s ease forwards;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10,10,15,0.97);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateX(-50%) translateY(-24px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Orbitron', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); background: rgba(255,255,255,0.06); }
+
+    .btn-nav {
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-nav:hover {
+      background: var(--pink-light);
+      box-shadow: 0 0 20px rgba(233,30,140,0.4);
+      transform: translateY(-1px);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    /* ════════════════════════════════
+       2. HERO
+    ════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(233,30,140,0.13) 0%, transparent 70%),
+        linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pink-dim);
+      border: 1px solid rgba(233,30,140,0.3);
+      border-radius: 100px;
+      padding: 6px 14px 6px 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pink);
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233,30,140,0.6); }
+      50%       { box-shadow: 0 0 0 6px rgba(233,30,140,0); }
+    }
+
+    .hero-badge-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--pink-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      font-size: clamp(34px, 4.5vw, 58px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--pink-light);
+      box-shadow: 0 0 28px rgba(233,30,140,0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(233,30,140,0.5);
+      color: var(--pink-light);
+      background: var(--pink-dim);
+      transform: translateY(-2px);
+    }
+
+    /* Orb */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 500px;
+    }
+
+    .orb-container {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-20px); }
+    }
+
+    .orb-core {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ff4db8 0%, var(--pink) 40%, #8b0057 80%, #3a0024 100%);
+      box-shadow: 0 0 60px rgba(233,30,140,0.5), 0 0 120px rgba(233,30,140,0.25), inset 0 0 40px rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-core::after {
+      content: '';
+      position: absolute;
+      top: 15%; left: 20%;
+      width: 35%; height: 25%;
+      background: rgba(255,255,255,0.16);
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+
+    .orb-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      z-index: 3;
+      filter: drop-shadow(0 0 16px rgba(255,255,255,0.4));
+    }
+
+    .orb-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      border-radius: 50%;
+      border: 1.5px solid rgba(233,30,140,0.35);
+    }
+
+    .orb-ring-1 {
+      width: 360px; height: 360px;
+      margin: -180px 0 0 -180px;
+      border-top-color: rgba(233,30,140,0.8);
+      animation: spin 8s linear infinite;
+    }
+
+    .orb-ring-2 {
+      width: 440px; height: 440px;
+      margin: -220px 0 0 -220px;
+      border-right-color: rgba(233,30,140,0.5);
+      animation: spin 13s linear infinite reverse;
+    }
+
+    .orb-ring-3 {
+      width: 520px; height: 520px;
+      margin: -260px 0 0 -260px;
+      border-bottom-color: rgba(233,30,140,0.3);
+      animation: spin 19s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .orb-label {
+      position: absolute;
+      background: rgba(15,15,24,0.92);
+      border: 1px solid rgba(233,30,140,0.3);
+      border-radius: 10px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      animation: labelIn 0.5s ease forwards;
+      transition: transform 0.1s ease;
+    }
+
+    .orb-label-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--pink);
+      flex-shrink: 0;
+    }
+
+    .orb-label span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .orb-label-1 { top: 40px;   right: -20px; animation-delay: 0.9s; }
+    .orb-label-2 { bottom: 100px; left: -40px; animation-delay: 1.2s; }
+    .orb-label-3 { bottom: 30px;  right: -10px; animation-delay: 1.5s; }
+
+    @keyframes labelIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════
+       SHARED SECTION STYLES
+    ════════════════════════════════ */
+    .section { padding: 100px 24px; }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ════════════════════════════════
+       3. ABOUT
+    ════════════════════════════════ */
+    .about { background: var(--dark2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .video-box {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .video-box:hover { border-color: rgba(233,30,140,0.4); }
+
+    .video-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(233,30,140,0.08) 0%, transparent 70%);
+    }
+
+    .play-btn {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(233,30,140,0.5);
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .video-box:hover .play-btn {
+      transform: scale(1.1);
+      box-shadow: 0 0 50px rgba(233,30,140,0.7);
+    }
+
+    .play-btn svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(233,30,140,0.3);
+      background: rgba(233,30,140,0.05);
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--pink);
+      margin-bottom: 4px;
+    }
+
+    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* ════════════════════════════════
+       4. SERVICES
+    ════════════════════════════════ */
+    .services { background: var(--dark); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--pink-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: rgba(233,30,140,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+
+    .service-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+
+    .service-desc { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+
+    /* ════════════════════════════════
+       5. FEATURES
+    ════════════════════════════════ */
+    .features { background: var(--dark2); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(233,30,140,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      background: rgba(233,30,140,0.04);
+    }
+
+    .feature-icon { font-size: 28px; }
+
+    .feature-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.4;
+    }
+
+    .feature-desc { font-size: 13px; line-height: 1.65; color: var(--text-muted); flex: 1; }
+
+    /* ════════════════════════════════
+       6. HOW IT WORKS
+    ════════════════════════════════ */
+    .how { background: var(--dark); }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 18px);
+      right: calc(12.5% + 18px);
+      height: 0;
+      border-top: 2px dashed rgba(233,30,140,0.4);
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--pink-dim);
+      border: 2px solid var(--pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', monospace;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--pink);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover .step-number {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(233,30,140,0.5);
+    }
+
+    .step-icon { font-size: 28px; margin-bottom: 12px; }
+
+    .step-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .step-desc { font-size: 13px; line-height: 1.65; color: var(--text-muted); }
+
+    /* ════════════════════════════════
+       7. PARTNERS
+    ════════════════════════════════ */
+    .partners { background: var(--dark2); }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .partner-card {
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
+      transition: all 0.3s ease;
+    }
+
+    .partner-card:hover {
+      border-color: rgba(233,30,140,0.4);
+      background: var(--pink-dim);
+      box-shadow: 0 0 20px rgba(233,30,140,0.15);
+    }
+
+    .partner-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+
+    .partner-card:hover .partner-name { color: var(--pink-light); }
+
+    /* ════════════════════════════════
+       8. FOOTER
+    ════════════════════════════════ */
+    .footer {
+      background: var(--dark3);
+      border-top: 1px solid var(--border);
+      padding: 64px 24px 32px;
+    }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand-icon {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-links a {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover { color: var(--pink-light); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+
+    .footer-socials { display: flex; gap: 10px; }
+
+    .social-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .social-icon:hover {
+      border-color: var(--pink);
+      background: var(--pink-dim);
+      transform: translateY(-2px);
+    }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .partners-grid { grid-template-columns: repeat(4, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar { top: 10px; width: calc(100% - 24px); padding: 12px 16px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero { padding: 100px 20px 60px; }
+      .hero-container { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { height: 340px; }
+      .orb-container, .orb-core { width: 200px; height: 200px; }
+      .orb-ring-1 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
+      .orb-ring-2 { width: 320px; height: 320px; margin: -160px 0 0 -160px; }
+      .orb-ring-3 { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
+      .orb-icon { font-size: 56px; }
+      .orb-label-1 { top: 20px; right: -10px; }
+      .orb-label-2 { bottom: 60px; left: -20px; }
+      .orb-label-3 { bottom: 10px; right: 0; }
+
+      .section { padding: 64px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .steps-row { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .steps-row::before { display: none; }
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: 30px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { justify-content: center; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body></body>
+<body>
+
+  <!-- ═══════════════════════════
+       1. NAVBAR
+  ═══════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-logo" href="#home">
+      <div class="nav-logo-icon">🌐</div>
+      <span class="nav-logo-text">CallMe F&amp;L</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="#contact" class="btn-nav">Get Started</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════
+       2. HERO
+  ═══════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-container">
+      <div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span class="hero-badge-text">Fulfillment Partner for Dropshippers</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Logistics That <em>Moves</em><br>as Fast as Your Sales
+        </h1>
+
+        <p class="hero-sub">
+          CallMe F&amp;L handles warehousing, picking, packing, and last-mile delivery — so you scale without the headache.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#services" class="btn-primary">
+            View Services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn-outline">Talk to Us</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" id="heroVisual">
+        <div class="orb-container">
+          <div class="orb-core"></div>
+          <div class="orb-icon">📦</div>
+          <div class="orb-ring orb-ring-1"></div>
+          <div class="orb-ring orb-ring-2"></div>
+          <div class="orb-ring orb-ring-3"></div>
+          <div class="orb-label orb-label-1">
+            <div class="orb-label-dot"></div>
+            <span>Ship Time: &lt;24h</span>
+          </div>
+          <div class="orb-label orb-label-2">
+            <div class="orb-label-dot"></div>
+            <span>99.2% Accuracy</span>
+          </div>
+          <div class="orb-label orb-label-3">
+            <div class="orb-label-dot"></div>
+            <span>50+ Partners</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       3. ABOUT
+  ═══════════════════════════ -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="section-tag reveal">Our Story</span>
+          <h2 class="section-title reveal reveal-delay-1">From Local Roots to Regional Scale</h2>
+          <p class="about-text reveal reveal-delay-2">
+            Born in Ho Chi Minh City, CallMe F&amp;L started as a small fulfillment hub serving local Shopee and Facebook sellers. Within two years, we expanded across Vietnam — partnering with top couriers, building warehouse nodes in Hanoi and Da Nang, and integrating with every major e-commerce platform in Southeast Asia.
+          </p>
+          <p class="about-text reveal reveal-delay-3">
+            Today we process hundreds of orders daily with an accuracy rate that rivals global 3PLs — at prices built for independent sellers and growing brands. We don't just ship packages; we handle the operational complexity so you can focus on what matters: marketing, products, and growth.
+          </p>
+        </div>
+
+        <div>
+          <div class="video-box reveal reveal-delay-2">
+            <div class="play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card reveal reveal-delay-2">
+              <div class="stat-value">500+</div>
+              <div class="stat-label">Orders per Day</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+              <div class="stat-value">15+</div>
+              <div class="stat-label">Provinces Covered</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-4">
+              <div class="stat-value">99.2%</div>
+              <div class="stat-label">Accuracy Rate</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-5">
+              <div class="stat-value">24h</div>
+              <div class="stat-label">Avg. Ship Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       4. SERVICES
+  ═══════════════════════════ -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag reveal">What We Do</span>
+        <h2 class="section-title reveal reveal-delay-1">Our Services</h2>
+        <p class="section-sub reveal reveal-delay-2">End-to-end fulfillment solutions purpose-built for dropshippers and print-on-demand sellers.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <span class="service-icon">📦</span>
+          <div class="service-name">Warehousing</div>
+          <p class="service-desc">Secure storage with real-time inventory tracking across multiple facilities. Know your stock levels at all times.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <span class="service-icon">🚚</span>
+          <div class="service-name">Last-Mile Delivery</div>
+          <p class="service-desc">Fast, reliable delivery to customers across Vietnam and Southeast Asia. Multiple courier integrations for best rates.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <span class="service-icon">🖨️</span>
+          <div class="service-name">Print-on-Demand</div>
+          <p class="service-desc">DTG, DTF, sublimation printing fulfilled and shipped same day. Apparel, accessories, home decor and more.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <span class="service-icon">🔗</span>
+          <div class="service-name">Shopify Integration</div>
+          <p class="service-desc">Auto-sync orders from your Shopify or TikTok Shop store. Zero manual work — orders flow in, packages flow out.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <span class="service-icon">📊</span>
+          <div class="service-name">Dashboard & Tracking</div>
+          <p class="service-desc">Real-time order tracking, inventory alerts, and analytics. Full visibility into your fulfillment pipeline 24/7.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <span class="service-icon">🎁</span>
+          <div class="service-name">Custom Packaging</div>
+          <p class="service-desc">Branded packaging, inserts, and an unboxing experience your customers will remember and share.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       5. FEATURES / WHY US
+  ═══════════════════════════ -->
+  <section class="section features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag reveal">Why Us</span>
+        <h2 class="section-title reveal reveal-delay-1">Why Sellers Choose CallMe F&amp;L</h2>
+        <p class="section-sub reveal reveal-delay-2">Everything you need to scale from 1 to 10,000 orders — under one roof.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">🛒</div>
+          <div class="feature-title">One-Stop Fulfillment</div>
+          <p class="feature-desc">Everything from storage to delivery. No juggling multiple vendors or tracking spreadsheets.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Flexible Capacity</div>
+          <p class="feature-desc">Handle 1 to 10,000 orders per day without changing a thing on your end. We scale with you.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">🎨</div>
+          <div class="feature-title">Wide Product Range</div>
+          <p class="feature-desc">Apparel, accessories, home decor, and more. If you can sell it, we can fulfill it.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon">✅</div>
+          <div class="feature-title">Proven Quality</div>
+          <p class="feature-desc">Trusted by top Shopify and TikTok Shop sellers across Southeast Asia with 99.2% accuracy.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">Ultra Fast Speed</div>
+          <p class="feature-desc">Ships within 1 business day. Your customers expect fast — we deliver faster.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">🕐</div>
+          <div class="feature-title">Production Days</div>
+          <p class="feature-desc">Most custom orders shipped within 1–3 business days. Even during peak season.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">🗺️</div>
+          <div class="feature-title">Multiple Locations</div>
+          <p class="feature-desc">Warehouses in Ho Chi Minh City, Hanoi, and Da Nang. Closer to your customers means faster delivery.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon">💰</div>
+          <div class="feature-title">Competitive Pricing</div>
+          <p class="feature-desc">Best rates in the market with volume discounts. Your margins stay healthy as you grow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       6. HOW IT WORKS
+  ═══════════════════════════ -->
+  <section class="section how" id="how">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag reveal">The Process</span>
+        <h2 class="section-title reveal reveal-delay-1">How It Works</h2>
+        <p class="section-sub reveal reveal-delay-2">Four simple steps from store to doorstep. You handle growth; we handle the rest.</p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step reveal reveal-delay-1">
+          <div class="step-number">01</div>
+          <div class="step-icon">🔌</div>
+          <div class="step-title">Connect Store</div>
+          <p class="step-desc">Integrate your Shopify, TikTok Shop, or WooCommerce store in minutes. Orders flow in automatically.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-number">02</div>
+          <div class="step-icon">🏭</div>
+          <div class="step-title">Send Inventory</div>
+          <p class="step-desc">Ship your products to our warehouse. We receive, inspect, and catalog every SKU in real time.</p>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-number">03</div>
+          <div class="step-icon">📬</div>
+          <div class="step-title">We Pick &amp; Pack</div>
+          <p class="step-desc">Our team picks, packs, and labels every order with precision — including custom branded packaging.</p>
+        </div>
+        <div class="step reveal reveal-delay-4">
+          <div class="step-number">04</div>
+          <div class="step-icon">🚀</div>
+          <div class="step-title">Delivered</div>
+          <p class="step-desc">Your customer receives their order fast. Tracking updates pushed automatically to your store.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       7. TRUSTED BY
+  ═══════════════════════════ -->
+  <section class="section partners" id="partners">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag reveal">Ecosystem</span>
+        <h2 class="section-title reveal reveal-delay-1">Trusted By</h2>
+        <p class="section-sub reveal reveal-delay-2">Integrated with the platforms and carriers your business already runs on.</p>
+      </div>
+
+      <div class="partners-grid">
+        <div class="partner-card reveal reveal-delay-1"><span class="partner-name">SHOPIFY</span></div>
+        <div class="partner-card reveal reveal-delay-2"><span class="partner-name">TIKTOK SHOP</span></div>
+        <div class="partner-card reveal reveal-delay-3"><span class="partner-name">LAZADA</span></div>
+        <div class="partner-card reveal reveal-delay-4"><span class="partner-name">TIKI</span></div>
+        <div class="partner-card reveal reveal-delay-5"><span class="partner-name">SENDO</span></div>
+        <div class="partner-card reveal reveal-delay-6"><span class="partner-name">WOOCOMMERCE</span></div>
+        <div class="partner-card reveal reveal-delay-1"><span class="partner-name">PRINTFUL</span></div>
+        <div class="partner-card reveal reveal-delay-2"><span class="partner-name">PRINTIFY</span></div>
+        <div class="partner-card reveal reveal-delay-3"><span class="partner-name">GHTK</span></div>
+        <div class="partner-card reveal reveal-delay-4"><span class="partner-name">GIAO HÀNG NHANH</span></div>
+        <div class="partner-card reveal reveal-delay-5"><span class="partner-name">VNPOST</span></div>
+        <div class="partner-card reveal reveal-delay-6"><span class="partner-name">ZALOPAY</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="separator" />
+
+  <!-- ═══════════════════════════
+       8. FOOTER
+  ═══════════════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">
+            <div class="footer-brand-icon">🌐</div>
+            CallMe F&amp;L
+          </div>
+          <p class="footer-tagline">Fulfillment &amp; Logistics — Built for Dropship &amp; POD sellers across Southeast Asia.</p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services">Warehousing</a></li>
+            <li><a href="#services">POD Printing</a></li>
+            <li><a href="#services">Last-Mile Delivery</a></li>
+            <li><a href="#services">Integration</a></li>
+            <li><a href="#services">Packaging</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Facilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Resources</div>
+          <ul class="footer-links">
+            <li><a href="#">API Docs</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Social</div>
+          <ul class="footer-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 CallMe F&amp;L. All rights reserved.</p>
+        <div class="footer-socials">
+          <div class="social-icon" title="Facebook">📘</div>
+          <div class="social-icon" title="Instagram">📸</div>
+          <div class="social-icon" title="TikTok">🎵</div>
+          <div class="social-icon" title="LinkedIn">💼</div>
+          <div class="social-icon" title="YouTube">▶️</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Scroll reveal via IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 2. Navbar scroll state
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // 3. Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
+    // 4. Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const activeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => activeObserver.observe(s));
+
+    // 5. Orb parallax on mousemove
+    const heroSection = document.querySelector('.hero');
+    const heroVisual = document.getElementById('heroVisual');
+    if (heroSection && heroVisual) {
+      heroSection.addEventListener('mousemove', e => {
+        const rect = heroVisual.getBoundingClientRect();
+        const dx = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
+        const dy = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
+        document.querySelectorAll('.orb-label').forEach((el, i) => {
+          const f = (i + 1) * 7;
+          el.style.transform = `translate(${dx * f}px, ${dy * f}px)`;
+        });
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.orb-label').forEach(el => el.style.transform = '');
+      });
+    }
+
+    // 6. Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinksList = document.getElementById('navLinks');
+    let menuOpen = false;
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      Object.assign(navLinksList.style, menuOpen ? {
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        top: '66px',
+        left: '0',
+        right: '0',
+        background: 'rgba(10,10,15,0.98)',
+        padding: '16px',
+        borderRadius: '0 0 14px 14px',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderTop: 'none',
+        gap: '4px'
+      } : { display: 'none' });
+    });
+  </script>
+</body>
 </html>
