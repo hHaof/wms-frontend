@@ -707,25 +707,29 @@
 
     .footer-top {
       display: grid;
-      grid-template-columns: 280px 1fr 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
       padding-bottom: 48px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
+      margin-bottom: 32px;
       align-items: start;
     }
 
-    .footer-brand-block {
+    .footer-brand-name {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-family: 'Orbitron', monospace;
+      font-size: 15px;
+      font-weight: 800;
     }
 
     .footer-logo-img {
-      width: 120px;
-      height: auto;
+      width: 36px;
+      height: 36px;
       object-fit: contain;
-      filter: brightness(1.1);
+      flex-shrink: 0;
     }
 
     .footer-tagline {
@@ -790,7 +794,7 @@
     ════════════════════════════════ */
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 280px 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
 
     @media (max-width: 768px) {
@@ -816,8 +820,7 @@
       .features-grid { grid-template-columns: 1fr 1fr; }
       .steps-row { grid-template-columns: 1fr 1fr; gap: 32px; }
       .steps-row::before { display: none; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .footer-logo-img { width: 90px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
 
@@ -1104,11 +1107,16 @@
   <footer class="footer" id="contact">
     <div class="footer-inner">
       <div class="footer-top">
-        <div class="footer-brand-block">
-          <img src="images/logo.png" alt="CallMe F&L" class="footer-logo-img">
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="footer-brand-name">
+            <img src="images/logo.png" alt="CallMe F&L" class="footer-logo-img">
+            <span>CallMe F&amp;L</span>
+          </div>
           <p class="footer-tagline">Fulfillment &amp; Logistics — Built for Lovers across the world.</p>
         </div>
 
+        <!-- Col 2: Services -->
         <div>
           <div class="footer-col-title">Services</div>
           <ul class="footer-links">
@@ -1119,6 +1127,7 @@
           </ul>
         </div>
 
+        <!-- Col 3: Company -->
         <div>
           <div class="footer-col-title">Company</div>
           <ul class="footer-links">
@@ -1127,8 +1136,7 @@
           </ul>
         </div>
 
-        <div></div>
-
+        <!-- Col 4: Social -->
         <div>
           <div class="footer-col-title">Social</div>
           <ul class="footer-links">
