@@ -473,54 +473,24 @@
       margin-bottom: 16px;
     }
 
-    .video-box {
-      background: var(--dark3);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .video-wrapper {
       position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
       overflow: hidden;
+      border: 1px solid rgba(233,30,140,0.25);
       margin-bottom: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 0;
+      box-shadow: 0 0 40px rgba(233,30,140,0.12);
     }
 
     .about-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 14px;
       display: block;
-    }
-
-    .video-box:hover { border-color: rgba(233,30,140,0.4); }
-
-    .video-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(233,30,140,0.08) 0%, transparent 70%);
-    }
-
-    .play-btn {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: var(--pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 30px rgba(233,30,140,0.5);
-      transition: all 0.3s ease;
-      z-index: 1;
-    }
-
-    .video-box:hover .play-btn {
-      transform: scale(1.1);
-      box-shadow: 0 0 50px rgba(233,30,140,0.7);
+      border-radius: 16px;
+      background: #0a0a0f;
     }
 
     .play-btn svg { width: 24px; height: 24px; fill: #fff; margin-left: 4px; }
@@ -933,16 +903,15 @@
         </div>
 
         <div>
-          <div class="video-box reveal reveal-delay-2">
+          <div class="video-wrapper reveal reveal-delay-2">
             <video
-              id="about-video"
               class="about-video"
               controls
               preload="metadata"
-              poster="images/video-thumbnail.jpg"
+              playsinline
+              controlslist="nodownload"
             >
-              <source src="videos/about.mp4" type="video/mp4">
-              Your browser does not support the video tag.
+              <source src="/videos/about.mp4" type="video/mp4">
             </video>
           </div>
           <div class="stats-grid">
