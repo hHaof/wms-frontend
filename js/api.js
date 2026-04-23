@@ -149,7 +149,11 @@ function statusBadge(status) {
 }
 
 function formatCurrency(n) {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(n) || 0);
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(Number(n) || 0);
 }
 
 function formatDate(d) {
