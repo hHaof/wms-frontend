@@ -315,6 +315,7 @@
       justify-content: center;
       position: relative;
       height: 500px;
+      overflow: visible;
     }
 
     .orb-container {
@@ -329,33 +330,21 @@
       50%       { transform: translateY(-20px); }
     }
 
-    .orb-core {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ff4db8 0%, var(--pink) 40%, #8b0057 80%, #3a0024 100%);
-      box-shadow: 0 0 60px rgba(233,30,140,0.5), 0 0 120px rgba(233,30,140,0.25), inset 0 0 40px rgba(255,255,255,0.08);
-      position: relative;
-      z-index: 2;
-    }
-
-    .orb-core::after {
-      content: '';
-      position: absolute;
-      top: 15%; left: 20%;
-      width: 35%; height: 25%;
-      background: rgba(255,255,255,0.16);
-      border-radius: 50%;
-      filter: blur(8px);
-    }
-
     .orb-icon {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 80px;
       z-index: 3;
-      filter: drop-shadow(0 0 16px rgba(255,255,255,0.4));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb-logo-img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(233,30,140,0.6));
     }
 
     .orb-ring {
@@ -421,9 +410,9 @@
       color: var(--text);
     }
 
-    .orb-label-1 { top: 40px;    right: -20px; animation-delay: 0.9s; }
-    .orb-label-2 { bottom: 100px; left: -40px;  animation-delay: 1.2s; }
-    .orb-label-3 { bottom: 30px;  right: -10px; animation-delay: 1.5s; }
+    .orb-label-1 { top: -10px;   right: -120px; animation-delay: 0.9s; }
+    .orb-label-2 { bottom: 120px; left: -140px; animation-delay: 1.2s; }
+    .orb-label-3 { bottom: -10px; right: -110px; animation-delay: 1.5s; }
 
     @keyframes labelIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -819,14 +808,14 @@
       .hero { padding: 100px 20px 60px; }
       .hero-container { grid-template-columns: 1fr; gap: 48px; }
       .hero-visual { height: 340px; }
-      .orb-container, .orb-core { width: 200px; height: 200px; }
+      .orb-container { width: 200px; height: 200px; }
       .orb-ring-1 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
       .orb-ring-2 { width: 320px; height: 320px; margin: -160px 0 0 -160px; }
       .orb-ring-3 { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
-      .orb-icon { font-size: 56px; }
-      .orb-label-1 { top: 20px; right: -10px; }
-      .orb-label-2 { bottom: 60px; left: -20px; }
-      .orb-label-3 { bottom: 10px; right: 0; }
+      .orb-logo-img { width: 100px; height: 100px; }
+      .orb-label-1 { top: -5px;  right: -80px; }
+      .orb-label-2 { bottom: 80px; left: -90px; }
+      .orb-label-3 { bottom: -5px; right: -70px; }
 
       .section { padding: 64px 20px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -895,8 +884,9 @@
 
       <div class="hero-visual" id="heroVisual">
         <div class="orb-container">
-          <div class="orb-core"></div>
-          <div class="orb-icon">📦</div>
+          <div class="orb-icon">
+            <img src="images/logo.png" alt="CallMe F&L Logo" class="orb-logo-img">
+          </div>
           <div class="orb-ring orb-ring-1"></div>
           <div class="orb-ring orb-ring-2"></div>
           <div class="orb-ring orb-ring-3"></div>
